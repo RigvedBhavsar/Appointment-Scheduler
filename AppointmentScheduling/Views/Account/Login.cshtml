@@ -3,15 +3,15 @@
     <h2>Sign In</h2>
     <div class="row">
         <div class="col-md-6">
-            <hr/>
+            <hr />
             <section id="loginForm">
                 <form id="account" method="post" asp-action="Login" asp-controller="Account">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div asp-validation-summary="All" class="text-danger small"></div>
                     <div class="form-group row">
                         <label class="col-md-2" asp-for="Email"></label>
                         <div class="col-md-8">
                             <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email"></span>
+                            <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
                     </div>
 
@@ -19,22 +19,22 @@
                         <label class="col-md-2" asp-for="Password"></label>
                         <div class="col-md-8">
                             <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password"></span>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-10 offset-md-2 checkbox">
                             <label class="pr-4 pl-0" asp-for="RememberMe">
-                                <input asp-for="RememberMe"/>
+                                <input asp-for="RememberMe" />
                             </label>
-                            Remember Me ? 
+                            Remember Me ?
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-10 offset-md-5">
-                            <input type="submit" value="Sign In" class="btn btn-primary"/>
+                            <input type="submit" value="Sign In" class="btn btn-primary" />
                         </div>
                     </div>
                     <p class="col-md-10 offset-md-4">
@@ -42,6 +42,10 @@
                     </p>
                 </form>
             </section>
-        </div> 
+        </div>
     </div>
 </div>
+@* Client Side Validatation *@
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -5,13 +5,13 @@
         <div class="col-md-6">
             <form method="post" asp-action="Register" asp-controller="Account">
                 <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
+                <div asp-validation-summary="All" class="text-danger small"></div>
 
                 <div class="form-group row">
                     <label class="col-md-4" asp-for="Name"></label>
                     <div class="col-md-8">
                         <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name"></span>
+                        <span asp-validation-for="Name" class="text-danger small"></span>
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                     <label class="col-md-4" asp-for="Email"></label>
                     <div class="col-md-8">
                         <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email"></span>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                     <label class="col-md-4" asp-for="Password"></label>
                     <div class="col-md-8">
                         <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password"></span>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
                     </div>
                 </div>
 
@@ -35,15 +35,15 @@
                     <label class="col-md-4" asp-for="ConfirmPassword"></label>
                     <div class="col-md-8">
                         <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword"></span>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-md-4" asp-for="RoleName"></label>
                     <div class="col-md-8">
-                        <input asp-for="RoleName" asp-item="@AppointmentScheduling.Utility.Helper.GetRolesForDropDown()" class="form-control" />
-                        <span asp-validation-for="RoleName"></span>
+                        <select asp-for="RoleName" asp-items="@AppointmentScheduling.Utility.Helper.GetRolesForDropDown()" class="form-control"></select>
+                        <span asp-validation-for="RoleName" class="text-danger small"></span>
                     </div>
                 </div>
 
@@ -60,3 +60,8 @@
         </div>
     </div>
 </div>
+
+@* Client Side Validatation *@
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
