@@ -434,3 +434,5 @@ D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\runt
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Shared\_AddEditAppointment.cshtml.g.cs
