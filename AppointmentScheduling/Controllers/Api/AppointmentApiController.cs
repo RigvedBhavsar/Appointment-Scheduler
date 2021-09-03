@@ -52,5 +52,55 @@ namespace AppointmentScheduling.Controllers.Api
             }
             return Ok(commanResponse);
         }
+
+        [HttpGet]
+        [Route("GetCalenderData")]
+        public IActionResult GetCalenderData(string doctorId)
+        {
+            CommanResponse<List<AppointmentVM>> commanResponse = new CommanResponse<List<AppointmentVM>>();
+            try
+            {
+                if (role == Helper.Patient)
+                {
+                    commanResponse.dataenum = _appointmentService.PatientsEventsById(loginUserId);
+                    commanResponse.status = Helper.succcess_code;
+                }
+                else if (role == Helper.Doctor)
+                {
+                    commanResponse.dataenum = _appointmentService.DoctorsEventsById(loginUserId);
+                    commanResponse.status = Helper.succcess_code;
+                }
+                else 
+                {
+                    commanResponse.dataenum = _appointmentService.DoctorsEventsById(doctorId);
+                    commanResponse.status = Helper.succcess_code;
+                }
+            }
+            catch (Exception e)
+            {
+                commanResponse.message = e.Message;
+                commanResponse.status = Helper.failure_code;
+            }
+            return Ok(commanResponse);
+        }
+
+
+        [HttpGet]
+        [Route("GetCalenderDataById/{id}")]
+        public IActionResult GetCalenderDataById(int id)
+        {
+            CommanResponse<AppointmentVM> commanResponse = new CommanResponse<AppointmentVM>();
+            try
+            { 
+                commanResponse.dataenum = _appointmentService.GetById(id);
+                commanResponse.status = Helper.succcess_code; 
+            }
+            catch (Exception e)
+            {
+                commanResponse.message = e.Message;
+                commanResponse.status = Helper.failure_code;
+            }
+            return Ok(commanResponse);
+        }
     }
 }
