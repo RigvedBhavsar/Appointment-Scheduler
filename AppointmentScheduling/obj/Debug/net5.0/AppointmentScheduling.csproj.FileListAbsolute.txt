@@ -101,7 +101,6 @@ D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.Diagnostics.HealthChecks.dll
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Abstractions.dll
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Composite.dll
-D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.FileProviders.Physical.dll
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\refs\Microsoft.Extensions.Hosting.Abstractions.dll
@@ -436,3 +435,9 @@ D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razo
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
 D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Shared\_AddEditAppointment.cshtml.g.cs
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\AppointmentScheduling.StaticWebAssets.xml
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\Mailjet.Client.dll
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\C#\Projects\AppointmentScheduling\AppointmentScheduling\obj\Debug\net5.0\Razor\Views\Home\AccessDenied.cshtml.g.cs

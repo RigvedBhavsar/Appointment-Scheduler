@@ -1,9 +1,12 @@
+using AppointmentScheduling.DbInitializer;
 using AppointmentScheduling.Models;
 using AppointmentScheduling.Services;
+using AppointmentScheduling.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,12 +43,35 @@ namespace AppointmentScheduling
             //AddEntiyFrameworkStores injects identy inside container from database
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+            //service for sending Emails
+            services.AddScoped<IEmailSender, EmailSender>();
+
+            //service for Cheking Roles and Adding Roles
+            services.AddScoped<IDbInitializer, DbInitializer.DbInitializer>();
+
+            //Service for Cache
+            services.AddDistributedMemoryCache();
+
+            //services for AccessDenied page
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Home/AccessDenied");
+            });
+
+            //Service for Stroring Session
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             //servie for accssing userObject
             services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env  , IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -63,6 +89,10 @@ namespace AppointmentScheduling
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            //Session
+            app.UseSession();
+            //Initializing Users
+            dbInitializer.Initialize();
 
             app.UseEndpoints(endpoints =>
             {

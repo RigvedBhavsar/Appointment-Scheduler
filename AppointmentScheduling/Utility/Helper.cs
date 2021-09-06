@@ -11,28 +11,36 @@ namespace AppointmentScheduling.Utility
         public static string Admin = "Admin";
         public static string Patient = "Patient";
         public static string Doctor = "Doctor";
-
-        public static string appointmentAdded = "Appointment Added Successfully.";
-        public static string appointmentUpdated = "Appointment Updated Successfully.";
-        public static string appointmentDeleted = "Appointment Deleted Successfully.";
-        public static string appointmentExists = "Appointment For Selected Date And Time Alreadt Exists.";
-        public static string appointmentNotExists = "Appointment Does Not Exists.";
-        
-        public static string appointmentAddError = "Something Went Wrong, PLease Try Again Later.";
-        public static string appointmentUpdateError = "Something Went Wrong, PLease Try Again Later.";
-        public static string somethingWentWrong = "Something Went Wrong, PLease Try Again Later.";
-
-        public static int succcess_code = 1;
+        public static string appointmentAdded = "Appointment added successfully.";
+        public static string appointmentUpdated = "Appointment updated successfully.";
+        public static string appointmentDeleted = "Appointment deleted successfully.";
+        public static string appointmentExists = "Appointment for selected date and time already exists.";
+        public static string appointmentNotExists = "Appointment not exists.";
+        public static string meetingConfirm = "Meeting confirm successfully.";
+        public static string meetingConfirmError = "Error while confirming meeting.";
+        public static string appointmentAddError = "Something went wront, Please try again.";
+        public static string appointmentUpdatError = "Something went wront, Please try again.";
+        public static string somethingWentWrong = "Something went wront, Please try again.";
+        public static int success_code = 1;
         public static int failure_code = 0;
 
-        public static List<SelectListItem> GetRolesForDropDown()
+        public static List<SelectListItem> GetRolesForDropDown(bool isAdmin)
         {
-            return new List<SelectListItem>
+            if (isAdmin)
             {
-                new SelectListItem{ Value = Helper.Admin , Text = Helper.Admin },
-                new SelectListItem{ Value = Helper.Patient , Text = Helper.Patient },
-                new SelectListItem{ Value = Helper.Doctor , Text = Helper.Doctor }
-            };
+                return new List<SelectListItem>
+                {
+                    new SelectListItem{Value=Helper.Admin,Text=Helper.Admin}
+                };
+            }
+            else
+            {
+                return new List<SelectListItem>
+                {
+                    new SelectListItem{Value=Helper.Patient,Text=Helper.Patient},
+                    new SelectListItem{Value=Helper.Doctor,Text=Helper.Doctor}
+                };
+            }
         }
 
         public static List<SelectListItem> GetTimeDropDown()
@@ -41,9 +49,9 @@ namespace AppointmentScheduling.Utility
             List<SelectListItem> duration = new List<SelectListItem>();
             for (int i = 1; i <= 12; i++)
             {
-                duration.Add(new SelectListItem { Value = minute.ToString(), Text = i + "Hr" });
+                duration.Add(new SelectListItem { Value = minute.ToString(), Text = i + " Hr" });
                 minute = minute + 30;
-                duration.Add(new SelectListItem { Value = minute.ToString(), Text = i + "Hr 30 min" });
+                duration.Add(new SelectListItem { Value = minute.ToString(), Text = i + " Hr 30 min" });
                 minute = minute + 30;
             }
             return duration;

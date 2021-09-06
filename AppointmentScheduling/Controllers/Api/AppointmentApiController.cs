@@ -20,7 +20,7 @@ namespace AppointmentScheduling.Controllers.Api
         private readonly string loginUserId;
         private readonly string role;
 
-        public AppointmentApiController(IAppointmentService appointmentService , IHttpContextAccessor httpContextAccessor)
+        public AppointmentApiController(IAppointmentService appointmentService, IHttpContextAccessor httpContextAccessor)
         {
             _appointmentService = appointmentService;
             _httpContextAccessor = httpContextAccessor;
@@ -32,75 +32,127 @@ namespace AppointmentScheduling.Controllers.Api
         [Route("SaveCalendarData")]
         public IActionResult SaveCalendarData(AppointmentVM data)
         {
-            CommanResponse<int> commanResponse = new CommanResponse<int>();
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
             try
             {
-                commanResponse.status = _appointmentService.AddUpdate(data).Result;
-                if (commanResponse.status == 1)
+                commonResponse.status = _appointmentService.AddUpdate(data).Result;
+                if (commonResponse.status == 1)
                 {
-                    commanResponse.message = Helper.appointmentUpdated;
+                    commonResponse.message = Helper.appointmentUpdated;
                 }
-                if (commanResponse.status == 2)
+                if (commonResponse.status == 2)
                 {
-                    commanResponse.message = Helper.appointmentAdded;
+                    commonResponse.message = Helper.appointmentAdded;
                 }
             }
             catch (Exception e)
             {
-                commanResponse.message = e.Message;
-                commanResponse.status = Helper.failure_code;
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
             }
-            return Ok(commanResponse);
+
+            return Ok(commonResponse);
         }
 
         [HttpGet]
-        [Route("GetCalenderData")]
-        public IActionResult GetCalenderData(string doctorId)
+        [Route("GetCalendarData")]
+        public IActionResult GetCalendarData(string doctorId)
         {
-            CommanResponse<List<AppointmentVM>> commanResponse = new CommanResponse<List<AppointmentVM>>();
+            CommonResponse<List<AppointmentVM>> commonResponse = new CommonResponse<List<AppointmentVM>>();
             try
             {
                 if (role == Helper.Patient)
                 {
-                    commanResponse.dataenum = _appointmentService.PatientsEventsById(loginUserId);
-                    commanResponse.status = Helper.succcess_code;
+                    commonResponse.dataenum = _appointmentService.PatientsEventsById(loginUserId);
+                    commonResponse.status = Helper.success_code;
                 }
                 else if (role == Helper.Doctor)
                 {
-                    commanResponse.dataenum = _appointmentService.DoctorsEventsById(loginUserId);
-                    commanResponse.status = Helper.succcess_code;
+                    commonResponse.dataenum = _appointmentService.DoctorsEventsById(loginUserId);
+                    commonResponse.status = Helper.success_code;
                 }
-                else 
+                else
                 {
-                    commanResponse.dataenum = _appointmentService.DoctorsEventsById(doctorId);
-                    commanResponse.status = Helper.succcess_code;
+                    commonResponse.dataenum = _appointmentService.DoctorsEventsById(doctorId);
+                    commonResponse.status = Helper.success_code;
                 }
             }
             catch (Exception e)
             {
-                commanResponse.message = e.Message;
-                commanResponse.status = Helper.failure_code;
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
             }
-            return Ok(commanResponse);
+            return Ok(commonResponse);
         }
-
 
         [HttpGet]
-        [Route("GetCalenderDataById/{id}")]
-        public IActionResult GetCalenderDataById(int id)
+        [Route("GetCalendarDataById/{id}")]
+        public IActionResult GetCalendarDataById(int id)
         {
-            CommanResponse<AppointmentVM> commanResponse = new CommanResponse<AppointmentVM>();
+            CommonResponse<AppointmentVM> commonResponse = new CommonResponse<AppointmentVM>();
             try
-            { 
-                commanResponse.dataenum = _appointmentService.GetById(id);
-                commanResponse.status = Helper.succcess_code; 
+            {
+
+                commonResponse.dataenum = _appointmentService.GetById(id);
+                commonResponse.status = Helper.success_code;
+
             }
             catch (Exception e)
             {
-                commanResponse.message = e.Message;
-                commanResponse.status = Helper.failure_code;
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
             }
-            return Ok(commanResponse);
+            return Ok(commonResponse);
         }
+
+        [HttpGet]
+        [Route("DeleteAppoinment/{id}")]
+        public async Task<IActionResult> DeleteAppoinment(int id)
+        {
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = await _appointmentService.Delete(id);
+                commonResponse.message = commonResponse.status == 1 ? Helper.appointmentDeleted : Helper.somethingWentWrong;
+
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+        [HttpGet]
+        [Route("ConfirmEvent/{id}")]
+        public IActionResult ConfirmEvent(int id)
+        {
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                var result = _appointmentService.ConfirmEvent(id).Result;
+                if (result > 0)
+                {
+                    commonResponse.status = Helper.success_code;
+                    commonResponse.message = Helper.meetingConfirm;
+                }
+                else
+                {
+
+                    commonResponse.status = Helper.failure_code;
+                    commonResponse.message = Helper.meetingConfirmError;
+                }
+
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+            return Ok(commonResponse);
+        }
+
+
     }
 }
